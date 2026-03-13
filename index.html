@@ -1,0 +1,105 @@
+<div class="container-principal">
+  
+  <div class="carrossel">
+    <div class="cartao">
+      <div class="imagem-falsa foto-1"></div>
+      <h3>Produto Premium</h3>
+      <p>Detalhes do item.</p>
+    </div>
+    <div class="cartao">
+      <div class="imagem-falsa foto-2"></div>
+      <h3>Design Moderno</h3>
+      <p>Detalhes do item.</p>
+    </div>
+    <div class="cartao">
+      <div class="imagem-falsa foto-3"></div>
+      <h3>Alta Conversão</h3>
+      <p>Detalhes do item.</p>
+    </div>
+    <div class="cartao">
+      <div class="imagem-falsa foto-1"></div>
+      <h3>Fácil de Usar</h3>
+      <p>Detalhes do item.</p>
+    </div>
+  </div>
+
+  <div class="indicador-scroll">
+    <span class="icone-mao">👈</span>
+    <span class="texto">Deslize</span>
+  </div>
+
+</div>
+
+<style>
+  /* 1. FUNDO E ALINHAMENTO GERAL */
+  body {
+    background: #eef2f5;
+    font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container-principal {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* Mais largo para o PC */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  /* 2. O CARROSSEL (Com Scroll Snap) */
+  .carrossel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 25px;
+    scroll-snap-type: x mandatory; /* Trava no cartão ao rolar */
+    scroll-behavior: smooth;
+  }
+
+  /* Estilizando a barra de rolagem (Fica bonito no PC) */
+  .carrossel::-webkit-scrollbar {
+    height: 8px;
+  }
+  .carrossel::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 10px;
+  }
+  .carrossel::-webkit-scrollbar-thumb {
+    background: #b0b0b0;
+    border-radius: 10px;
+  }
+  .carrossel::-webkit-scrollbar-thumb:hover {
+    background: #888;
+  }
+
+  /* 3. OS CARTÕES (Design Limpo) */
+  .cartao {
+    min-width: 260px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    scroll-snap-align: center; /* Ponto de travamento do scroll */
+    transition: transform 0.3s ease;
+  }
+  
+  .cartao:hover {
+    transform: translateY(-5px); /* Efeito de flutuar ao passar o mouse (PC) */
+  }
+
+  .imagem-falsa {
+    width: 100%;
+    height: 160px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+  .foto-1 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+  .foto-2 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
+  .foto-3 { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
+
+  .cartao h3 { margin: 0; color: #222; font-size: 20px; }
+  .
