@@ -1,105 +1,125 @@
-<div class="container-principal">
-  
-  <div class="carrossel">
-    <div class="cartao">
-      <div class="imagem-falsa foto-1"></div>
-      <h3>Produto Premium</h3>
-      <p>Detalhes do item.</p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animação Scroll Realista</title>
+  <style>
+    /* FUNDO GERAL BEM LIMPO */
+    body {
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .container-principal {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      overflow: hidden; /* Impede que os cartões vazem da tela */
+    }
+
+    /* O TRILHO DOS CARTÕES (Aqui entra a nova animação que move os itens) */
+    .trilho-cartoes {
+      display: flex;
+      gap: 15px;
+      /* Animação com o mesmo tempo da mãozinha */
+      animation: moverCartoes 2.5s infinite ease-in-out;
+    }
+
+    /* OS CARTÕES (Estilo Wireframe do print) */
+    .cartao {
+      min-width: 160px;
+      height: 100px;
+      background: #ffffff;
+      border: 2px solid #888888;
+      border-radius: 12px;
+    }
+
+    /* A ANIMAÇÃO DA MÃO E DA SOMBRA */
+    .animacao-mao {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Sombra do clique */
+    .sombra-clique {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      top: 10px;
+      left: 5px;
+      animation: piscarSombra 2.5s infinite ease-in-out;
+    }
+
+    /* Ícone da mão em SVG */
+    .icone-mao {
+      width: 60px;
+      height: 60px;
+      transform-origin: bottom right;
+      animation: cliqueEArraste 2.5s infinite ease-in-out;
+      filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.2)); 
+    }
+
+    /* KEYFRAMES: Mão Aparece > Clica > Arrasta (-100px) > Solta */
+    @keyframes cliqueEArraste {
+      0% { transform: translateX(50px) scale(1); opacity: 0; }
+      15% { transform: translateX(50px) scale(1); opacity: 1; }
+      25% { transform: translateX(50px) scale(0.85); opacity: 1; } /* CLICA */
+      70% { transform: translateX(-50px) scale(0.85); opacity: 1; } /* ARRASTA */
+      80% { transform: translateX(-50px) scale(1); opacity: 0; } /* SOLTA */
+      100% { transform: translateX(50px) scale(1); opacity: 0; }
+    }
+
+    /* KEYFRAMES: Os cartões se movem EXATAMENTE junto com a mão (-100px) */
+    @keyframes moverCartoes {
+      0%, 25% { transform: translateX(0); } /* Parado antes do clique da mão */
+      70%, 80% { transform: translateX(-100px); } /* Move para o lado junto com a mão */
+      100% { transform: translateX(0); } /* Volta para o início discretamente */
+    }
+
+    /* KEYFRAMES: Sombra do clique */
+    @keyframes piscarSombra {
+      0%, 15% { opacity: 0; transform: scale(0.5); }
+      25%, 70% { opacity: 1; transform: scale(1.2); }
+      80%, 100% { opacity: 0; transform: scale(0.5); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container-principal">
+    
+    <div class="trilho-cartoes">
+      <div class="cartao"></div>
+      <div class="cartao"></div>
+      <div class="cartao"></div>
+      <div class="cartao"></div>
+      <div class="cartao"></div>
     </div>
-    <div class="cartao">
-      <div class="imagem-falsa foto-2"></div>
-      <h3>Design Moderno</h3>
-      <p>Detalhes do item.</p>
+
+    <div class="animacao-mao">
+      <div class="sombra-clique"></div>
+      <svg class="icone-mao" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.5 10.5V6.5a2.5 2.5 0 0 0-5 0v6M10.5 16.5l-2-2a2 2 0 0 0-2.83 2.83l3.83 3.83a4 4 0 0 0 2.83 1.17h2.34a4 4 0 0 0 3.8-2.73l1.5-4.5a2 2 0 0 0-1.9-2.6h-3.07"></path>
+      </svg>
     </div>
-    <div class="cartao">
-      <div class="imagem-falsa foto-3"></div>
-      <h3>Alta Conversão</h3>
-      <p>Detalhes do item.</p>
-    </div>
-    <div class="cartao">
-      <div class="imagem-falsa foto-1"></div>
-      <h3>Fácil de Usar</h3>
-      <p>Detalhes do item.</p>
-    </div>
+
   </div>
 
-  <div class="indicador-scroll">
-    <span class="icone-mao">👈</span>
-    <span class="texto">Deslize</span>
-  </div>
-
-</div>
-
-<style>
-  /* 1. FUNDO E ALINHAMENTO GERAL */
-  body {
-    background: #eef2f5;
-    font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-  }
-
-  .container-principal {
-    position: relative;
-    width: 100%;
-    max-width: 900px; /* Mais largo para o PC */
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  /* 2. O CARROSSEL (Com Scroll Snap) */
-  .carrossel {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 25px;
-    scroll-snap-type: x mandatory; /* Trava no cartão ao rolar */
-    scroll-behavior: smooth;
-  }
-
-  /* Estilizando a barra de rolagem (Fica bonito no PC) */
-  .carrossel::-webkit-scrollbar {
-    height: 8px;
-  }
-  .carrossel::-webkit-scrollbar-track {
-    background: #e0e0e0;
-    border-radius: 10px;
-  }
-  .carrossel::-webkit-scrollbar-thumb {
-    background: #b0b0b0;
-    border-radius: 10px;
-  }
-  .carrossel::-webkit-scrollbar-thumb:hover {
-    background: #888;
-  }
-
-  /* 3. OS CARTÕES (Design Limpo) */
-  .cartao {
-    min-width: 260px;
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    scroll-snap-align: center; /* Ponto de travamento do scroll */
-    transition: transform 0.3s ease;
-  }
-  
-  .cartao:hover {
-    transform: translateY(-5px); /* Efeito de flutuar ao passar o mouse (PC) */
-  }
-
-  .imagem-falsa {
-    width: 100%;
-    height: 160px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-  }
-  .foto-1 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
-  .foto-2 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
-  .foto-3 { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
-
-  .cartao h3 { margin: 0; color: #222; font-size: 20px; }
-  .
+</body>
+</html>
